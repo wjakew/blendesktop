@@ -1,6 +1,6 @@
-./dist
-./build
-./app
+dist/
+build/
+app/
 node_modules/
 .env
 .env.local

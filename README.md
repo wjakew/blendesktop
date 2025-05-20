@@ -45,6 +45,36 @@ npm run pack
 npm run dist
 ```
 
+### Platform-Specific Builds
+
+The application uses electron-builder for creating distributable packages. Here's what you'll get for each platform:
+
+#### macOS
+- Builds a `.dmg` installer
+- Run: `npm run dist` on macOS
+- Output will be in `dist/` directory
+
+#### Windows
+- Builds an NSIS installer (`.exe`)
+- Run: `npm run dist` on Windows
+- Output will be in `dist/` directory
+
+#### Linux
+- Builds an AppImage
+- Run: `npm run dist` on Linux
+- Output will be in `dist/` directory
+
+### Development Build
+
+For development and testing:
+```bash
+# Install dependencies
+npm install
+
+# Start the application in development mode
+npm start
+```
+
 ## Usage
 
 1. Launch the application

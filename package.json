@@ -6,21 +6,28 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"  
+    "dist": "electron-builder"
   },
   "build": {
-  "appId": "com.jakubwawak.blenddesktop",
-  "mac": { "target": "dmg" },
-  "win": { "target": "nsis" },
-  "linux": { "target": "AppImage" }
-},
+    "appId": "com.jakubwawak.blenddesktop",
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
   "keywords": [],
   "author": "Jakub Wawak",
   "license": "ISC",
   "type": "commonjs",
   "description": "",
   "devDependencies": {
-    "electron": "^36.2.1"
+    "electron": "^36.2.1",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",
