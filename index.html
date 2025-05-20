@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>blend desktop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100vw);
+        }
+      }
+
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: 'Roboto', monospace;
+        background: linear-gradient(-45deg, #000000, #0a2a0c, #330d1f, #000000);
+        background-size: 400% 400%;
+        animation: gradientAnimation 15s ease infinite;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 20px;
+        position: relative;
+      }
+
+      .cloud {
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        filter: blur(5px);
+        z-index: -1;
+      }
+
+      .cloud:nth-child(1) {
+        top: 20%;
+        animation: float 20s linear infinite;
+      }
+
+      .cloud:nth-child(2) {
+        top: 40%;
+        animation: float 25s linear infinite;
+        width: 200px;
+      }
+
+      .cloud:nth-child(3) {
+        top: 60%;
+        animation: float 30s linear infinite;
+        width: 180px;
+      }
+
+      .cloud:nth-child(4) {
+        top: 80%;
+        animation: float 22s linear infinite;
+        width: 160px;
+      }
+
+      h1 {
+        color: white;
+        text-align: center;
+        margin-bottom: 2vh;
+        font-size: calc(1.5rem + 1vh);
+      }
+
+      #fileList {
+        width: 100%;
+        max-width: 500px;
+        list-style: none;
+        overflow-y: auto;
+        max-height: 30vh;
+        margin: 2vh 0;
+        padding-right: 10px;
+      }
+
+      #fileList::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      #fileList::-webkit-scrollbar-track {
+        background: #1a1a1a;
+        border-radius: 4px;
+      }
+
+      #fileList::-webkit-scrollbar-thumb {
+        background: #4CAF50;
+        border-radius: 4px;
+      }
+
+      .file-item {
+        background: #1a1a1a;
+        padding: 10px 15px;
+        margin: 5px 0;
+        border-radius: 4px;
+        border: 1px solid #333;
+        cursor: move;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+      }
+
+      .file-item.dragging {
+        opacity: 0.5;
+        background: #2a2a2a;
+      }
+
+      .file-item .remove-btn {
+        color: #ff4444;
+        cursor: pointer;
+        padding: 0 5px;
+        font-size: 14px;
+        opacity: 0.8;
+        transition: opacity 0.2s ease;
+      }
+
+      .file-item .remove-btn:hover {
+        opacity: 1;
+      }
+
+      button {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-family: 'Roboto', monospace;
+        margin-top: 2vh;
+      }
+
+      button:hover {
+        background: #45a049;
+      }
+
+      .upload-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 2vh 0;
+        position: relative;
+        height: 20vh;
+        min-height: 120px;
+      }
+
+      .upload-zone {
+        border: 2px dashed rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .upload-zone:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .upload-zone p {
+        margin: 0;
+        font-size: calc(1rem + 0.5vh);
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .upload-zone.dragover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: white;
+      }
+
+      input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .header-logo {
+        height: 60px;
+        margin-bottom: 2vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <img src="logo.png" alt="PDF Merger" class="header-logo">
+    <div class="upload-container">
+      <div class="upload-zone" id="dropZone">
+        <p>Drag PDFs here or click to upload</p>
+      </div>
+      <input type="file" id="pdfFiles" multiple accept="application/pdf" />
+    </div>
+    <ul id="fileList"></ul>
+    <button id="mergeBtn">Merge PDFs</button>
+    <script src="renderer.js"></script>
+    <script>
+      const dropZone = document.getElementById('dropZone');
+      const fileInput = document.getElementById('pdfFiles');
+
+      // Highlight drop zone when file is dragged over it
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      });
+
+      dropZone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+      });
+    </script>
+  </body>
+</html>
