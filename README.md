@@ -13,6 +13,8 @@ A sleek and modern desktop application for merging PDF files. Built with Electro
 - 📋 Reorderable file list
 - 💻 Cross-platform support (macOS, Windows, Linux)
 
+![src1](./src1.png)
+
 ## Installation
 
 1. Clone the repository:

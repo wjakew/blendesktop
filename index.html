@@ -162,6 +162,16 @@
         background: #45a049;
       }
 
+      footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.8rem;
+      }
+
       .upload-container {
         width: 100%;
         max-width: 500px;
@@ -199,6 +209,14 @@
         border-color: white;
       }
 
+      .drag-instruction {
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        margin-bottom: 8px;
+        font-size: 0.8rem;
+        font-weight: normal;
+      }
+
       input[type="file"] {
         position: absolute;
         width: 100%;
@@ -227,6 +245,7 @@
       </div>
       <input type="file" id="pdfFiles" multiple accept="application/pdf" />
     </div>
+    <h6 class="drag-instruction">You can drag and drop to change order</h6>
     <ul id="fileList"></ul>
     <button id="mergeBtn">Merge PDFs</button>
     <script src="renderer.js"></script>
@@ -250,5 +269,8 @@
         dropZone.classList.remove('dragover');
       });
     </script>
+    <footer>
+      <h6>Made with ❤️ by Jakub Wawak</h6>
+    </footer>
   </body>
 </html>
