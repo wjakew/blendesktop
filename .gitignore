@@ -1,5 +1,4 @@
 dist/
-build/
 app/
 node_modules/
 .env
